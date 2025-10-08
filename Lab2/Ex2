@@ -1,0 +1,47 @@
+import pymc as pm
+import numpy as np
+import matplotlib.pyplot as plt
+import arviz as az
+
+np.random.seed(12)
+
+p11 = np.random.poisson(1, 1000)
+p12 = np.random.poisson(2, 1000)
+p13 = np.random.poisson(5, 1000)
+p14 = np.random.poisson(10, 1000)
+
+prand = np.random.choice([1, 2, 5, 10], 1000)
+p21 = np.random.poisson(prand)
+
+plt.hist(p11, bins = range(0, 25), alpha = 0.5, label = "lambda = 1")
+plt.hist(p12, bins = range(0, 25), alpha = 0.5 , label = "lambda = 2")
+plt.hist(p13, bins = range(0, 25), alpha = 0.5, label = "lambda = 5")
+plt.hist(p14, bins = range(0, 25), alpha = 0.5, label = "lambda = 10")
+plt.hist(p21, bins = range(0, 25), alpha = 0.7, label = "lambda random", edgecolor = "black")
+plt.xlabel("Valori")
+plt.ylabel("Frecventa")
+plt.title("Poisson Normal")
+plt.legend()
+plt.show()
+
+#Distributia cu lambda random este o combinatie liniara a celorlalte distributii.
+#Observam ca acolo unde este un overlap intre distributiile cu lambda fix, distributia cu lambda random are o frecventa mai mare.
+
+
+
+prand = np.random.choice([1, 2, 5, 10], 1000, p = [2/10, 2/10, 5/10, 1/10])
+p21 = np.random.poisson(prand)
+
+plt.hist(p11, bins = range(0, 25), alpha = 0.5, label = "lambda = 1")
+plt.hist(p12, bins = range(0, 25), alpha = 0.5 , label = "lambda = 2")
+plt.hist(p13, bins = range(0, 25), alpha = 0.5, label = "lambda = 5")
+plt.hist(p14, bins = range(0, 25), alpha = 0.5, label = "lambda = 10")
+plt.hist(p21, bins = range(0, 25), alpha = 0.7, label = "lambda random", edgecolor = "black")
+plt.xlabel("Valori")
+plt.ylabel("Frecventa")
+plt.title("Probabilitati: 2/10, 2/10, 5/10, 1/10")
+plt.legend()
+plt.show()
+
+#Observam ca distributia cu lambda random s-a modificat, avand in vedere noile probabilitati.
+#Nu mai este o combinatie liniara simpla a celorlalte distributii.
