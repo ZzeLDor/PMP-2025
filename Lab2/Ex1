@@ -1,0 +1,36 @@
+import pymc as pm
+import numpy as np
+import matplotlib.pyplot as plt
+import arviz as az
+
+np.random.seed(12)
+
+red_tot = 0
+for i in range(10000):
+
+    a = 3
+    b = 4
+    c = 2
+
+    x = np.random.randint(1,7)
+
+    if x == 2 or x == 3 or x == 5:
+        c += 1
+    elif x == 6:
+        a += 1
+    else:
+        b += 1
+
+    draw = np.random.randint(1, a + b + c + 1)
+
+    if draw <= a:
+        red_tot += 1
+    elif draw <= a + b:
+        pass
+    else:
+        pass
+
+print(red_tot / 10000)
+print("Probabilitate reala:", 1/2 * 3/10 + 1/6 * 4/10 + 2/6 * 3/10)
+
+
